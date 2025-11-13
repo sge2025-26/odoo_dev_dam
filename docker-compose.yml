@@ -45,10 +45,14 @@ services:
     # Mapeamos el directorio del contenedor "var/lib/postgresql/data" en un directorio "./volumesOdoo/dataPostgreSQL"
     # situado en el lugar donde ejecutemos "Docker compose"
     volumes:
-      - ./data/dataPostgreSQL:/var/lib/postgresql/data
+      - postgres_data_volume:/var/lib/postgresql/data    
+      #  - ./data/dataPostgreSQL:/var/lib/postgresql/data
       - ./data/backups:/backups                                    # Para guardar backups de la base de datos directamente
     networks:
       - network_dev_dam
+
+volumes:
+  postgres_data_volume:
 
 networks:
   network_dev_dam:
