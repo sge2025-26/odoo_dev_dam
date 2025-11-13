@@ -19,7 +19,13 @@ fi
 echo "Restaurando estructura de carpetas de datos..."
 tar -xzvf $PKG_PATH
 
-# 3. Levantar los servicios de Docker
+# 3. AJUSTE CRÍTICO DE PERMISOS
+# Usamos un contenedor temporal de postgres para cambiar el propietario del volumen de datos 
+# a su usuario interno (UID 999 o 70). Esto es VITAL para la portabilidad.
+echo "-> Corrigiendo permisos del volumen de datos de PostgreSQL..."
+docker run --rm -v $(pwd)/data/dataPostgreSQL:/var/lib/postgresql/data  postgres:15 chown -R postgres:postgres /var/lib/postgresql/data
+
+# 4. Levantar los servicios de Docker
 echo "Iniciando Docker Compose..."
 docker-compose up -d
 
