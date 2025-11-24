@@ -37,7 +37,7 @@ Para guardar los cambios
 ```bash
 sudo bash scripts/backup.sh
 
-git add .
+git add .                           # usar sudo si da errores de permisos
 git commit -m "Comentario que sea"
 git push
 ```
